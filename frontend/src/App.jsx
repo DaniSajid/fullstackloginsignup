@@ -1,26 +1,39 @@
-import {BrowserRouter ,Route, Routes } from "react-router-dom"
-import HomeComp from "./pages/HomeComp"
-import LoginComp from "./loginSignup/LoginComp"
-import SignupComp from "./loginSignup/SignupComp"
-import HeaderComp from "./header/HeaderComp"
-import FooterComp from "./footer/FooterComp"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomeComp from "./pages/HomeComp";
+import LoginComp from "./loginSignup/LoginComp";
+import SignupComp from "./loginSignup/SignupComp";
+import HeaderComp from "./header/HeaderComp";
+import FooterComp from "./footer/FooterComp";
+import ProtectedRoute from "./ProtectedRoute"; // Import the ProtectedRoute component
 
 function App() {
- 
-
   return (
     <>
       <BrowserRouter>
-      <HeaderComp/>
+        <HeaderComp />
         <Routes>
           <Route path="/" element={<HomeComp />} />
-          <Route path="/login" element={<LoginComp />} />
-          <Route path="/register" element={<SignupComp />} />
+          <Route
+            path="/login"
+            element={
+              <ProtectedRoute>
+                <LoginComp />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute>
+                <SignupComp />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
-        <FooterComp/>
+        <FooterComp />
       </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
